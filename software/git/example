@@ -1,0 +1,14 @@
+# 0. generate new key on you working pc, add the public key into the github account.
+#    config the git env of thie working pc, user.email is the github account name.
+#    git config --global user.name "xxx"
+#    git config --global user.email "xxx@xxx.xxx"
+# 1. build new project repo on github, for instance the name is "Owl"
+# 2. init and add some origen file
+#    git init
+#    echo "Owl" >> README.md
+#    git add README.md
+#    git commit -m "first commit"
+# 3. add remote repo into your local repo, the "master" is the default branch name.
+#    git remote add Owl git@github.com:user_name/Owl.git
+#    git push Owl master
+

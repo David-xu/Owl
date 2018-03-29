@@ -1,0 +1,6 @@
+1. git add
+	1). tracking the new file
+	2). add the change of file into commit buffer, we can use "git commit -a" without doing the "git add".
+
+2. git commit
+3. git push
