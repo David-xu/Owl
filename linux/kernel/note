@@ -1,0 +1,4 @@
+# 借助一些辅助工具研究内核，通过qemu(kvm)+gdb的方式来仿真调试内核
+# utilities version:
+#           kernel(3.12.7)
+#           

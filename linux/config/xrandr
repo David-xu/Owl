@@ -1,0 +1,15 @@
+xrandr is a linux tool used to config the display
+1. changing the screen resolution
+   need to change the resolution to 1500*850
+   0) get the output monitor name by running the command "xrandr"
+   1) get the xrandr mode parameter by running the command "cvt 1500 850", the output seem below:
+      # 1504x850 59.94 Hz (CVT) hsync: 52.92 kHz; pclk: 105.00 MHz
+      Modeline "1504x850_60.00"  105.00  1504 1592 1744 1984  850 853 863 883 -hsync +vsync
+   2) run the command:
+      xrandr --newmode "1504x850_60.00"  105.00  1504 1592 1744 1984  850 853 863 883 -hsync +vsync
+   3) add the newmode into the monitor
+      xrandr --addmode VGA-1 1504x850_60.00
+   4) change the resolution in system config UI tools
+
+
+reference: https://wiki.archlinux.org/index.php/Xrandr_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
