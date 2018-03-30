@@ -2,3 +2,64 @@
 # utilities version:
 #           kernel(3.12.7)
 #           
+
+0. prepare software which is needed when building kernel
+	1)ncurses	yum install ncurses-devel
+	
+
+1. prepare the debug dir
+mkdir kernel_debug
+cd kernel_debug
+mkdir build
+mkdir vm
+cd ${kernel_debug}/build
+cp -s ~/proj/Owl/linux/kernel/dbg_proj/build/autoconf.sh ./
+cd ${kernel_debug}/vm
+cp -s ~/proj/Owl/linux/kernel/dbg_proj/vm/* ./
+
+2. config and make kernel
+./autoconf.sh
+make -j8
+make sure "CONFIG_DEBUG_INFO" and "CONFIG_FRAME_POINTER" macro has defined, they are needed while debuging with gdb.
+
+3. config the vscode debuger
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/vmlinux",
+            "sourceFileMap": {
+                "/home/x10168/src_build/src/linux-3.12.7": "${workspaceRoot}/linux-3.12.7"
+            },
+            "miDebuggerServerAddress": "192.168.2.10:1234",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
+
+tips:
+1) “program”参数指定内核编译生成的elf文件vmlinux，该文件中包含了内核相关符号信息，是一个可执行文件，专门用于gdb调试。
+2) “miDebuggerServerAddress”参数实际就是指定进行远程调试并连接gdbserver，这相当于在gdb中执行"target remote 192.168.2.10:1234"
+3) "sourceFileMap"参数指定编译源码路径(vmlinux调试信息中的源码路径)和vscode中代码路径的对应关系，这里在vscode中打开的文件夹时${workspaceRoot}，其中源码放在了linux-3.12.7路径下
+
+4 run 
+	1)使用qemu启动内核，参数"-gdb tcp:1234 -S"配置为启动gdbserver
+	2)vscode中断点并启动调试
