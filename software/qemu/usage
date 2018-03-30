@@ -1,0 +1,8 @@
+1. config & make
+	本例使用qemu-2.11.1为例，对于x86支持kvm的环境，配置时需要启用--enable-kvm,同时只开启x86模拟的支持，这里i386-softmmu和x86_64-softmmu,配置如下所示:
+	../../src/qemu-2.11.1/configure --enable-kvm --target-list=arm-softmmu,i386-softmmu,x86_64-softmmu
+	并不安装到任何目录，使用时也是直接指定elf运行,所以直接编译即可
+	make -j8
+2. 运行时需要加上-enable-kvm开关
+3. 生成空的磁盘文件
+	qemu-img create -f qcow2 disk.img 20G

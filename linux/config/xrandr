@@ -12,4 +12,11 @@ xrandr is a linux tool used to config the display
    4) change the resolution in system config UI tools
 
 
+example:
+
+cvt 1500 850
+xrandr --newmode "1504x850_60.00"  105.00  1504 1592 1744 1984  850 853 863 883 -hsync +vsync
+xrandr --addmode Virtual-1 1504x850_60.00
+xrandr --output VGA1 --mode 1280x1024_60.00
+
 reference: https://wiki.archlinux.org/index.php/Xrandr_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
