@@ -1,0 +1,11 @@
+centos 7
+1. vim /etc/NetworkManager/NetworkManager.conf
+	dns=none
+   save & exit
+2. systemctl restart NetworkManager.service
+3. vim /etc/resolv.conf
+	nameserver 8.8.8.8
+
+centos 6
+1. vim /etc/resolv.conf
+        nameserver 8.8.8.8
