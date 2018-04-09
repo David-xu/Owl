@@ -5,4 +5,6 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 yum check-update
 sudo yum install code
 
+2. 
+
 
