@@ -1,0 +1,14 @@
+centos 7:
+ref:
+https://www.jianshu.com/p/35640fc5672b
+
+1. install vnc
+yum install tigervnc-server
+2. config
+cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service
+change the config file
+3. enable service
+systemctl enable vncserver@\:1.service
+4. disable firewall
+5. start the vncserver, we need to init password, run as the user of the vncserver
+vncserver
