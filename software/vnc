@@ -12,3 +12,8 @@ systemctl enable vncserver@\:1.service
 4. disable firewall
 5. start the vncserver, we need to init password, run as the user of the vncserver
 vncserver
+
+commands:
+vncserver :1 -geometry 1500x850
+vncserver -list
+vncserver -kill :1
