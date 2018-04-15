@@ -8,13 +8,17 @@
 3. git mv
 
 4. git commit
-5. git push
+5. git push [repo_name] [branch_name]
+	# 该命令用于将本地的[branch_name]分支推送到远程仓库[repo_name]
 
-6. git fetch
-	# 用于抓取远程分支
+6. git fetch [repo_name]
+	# 用于从远程仓库抓取数据
 
 7. git branch -b
 	# 新建分支
 
 8. git checkout
 	# 切换到分支
+	
+9. git pull
+	如果本地分支跟踪了远程仓库的某个分支，则该命令会很方便的直接抓取数据并合并到本地分支
