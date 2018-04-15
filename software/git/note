@@ -10,3 +10,11 @@
 4. git commit
 5. git push
 
+6. git fetch
+	# 用于抓取远程分支
+
+7. git branch -b
+	# 新建分支
+
+8. git checkout
+	# 切换到分支
