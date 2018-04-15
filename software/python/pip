@@ -1,0 +1,16 @@
+0.install pip with internet
+	curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+	python get-pip.py
+
+1.install from src
+	download pip src
+	python setup.py build
+	sudo python setup.py install
+
+2.install packages without internet
+	2.1 download package files
+		pip freeze >requirements.txt
+		mkdir pkgs
+		pip install --download pkgs/ -r requirements.txt
+	2.2 install
+		pip install --no-index --find-index=pkgs/ -r requirements.txt
