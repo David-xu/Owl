@@ -1,0 +1,2 @@
+﻿# bit count alg
+# 计算每个bit出现的次数,保存在一个出现次数(对n_type取模)数组中返回,[0]中出现的bit则代表该bit出现了n_type的整数倍,[1]中则代表出现了1 mod n_type次
