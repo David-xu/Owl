@@ -1,0 +1,10 @@
+#!/bin/bash
+# This script used to remove all msg_queue which belongs to definite user.
+
+echo user: $(whoami)
+
+for line in $(ipcs -q | grep $(whoami) | awk '{print $2}')
+do
+	echo ipcrm -q ${line}
+	ipcrm -q ${line}
+done

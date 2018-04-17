@@ -1,1 +1,12 @@
-1. check the virt type: virt-what
+﻿1. check the virt type: virt-what
+
+2. 查看驱动
+ethtool -i eth0
+
+3. mac地址修改
+ifconfig eth0 down
+ifconfig eth0 hw ether 1234567890ab
+ifconfig eth0 up
+
+4. 添加路由
+route add -net x.x.x.x netmask x.x.x.x gw ipaddr
