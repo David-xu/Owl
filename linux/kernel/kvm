@@ -1,0 +1,55 @@
+kvm部分
+kvm_vm_ioctl()
+
+
+kvm_vcpu_ioctl()
+	case KVM_RUN:
+	kvm_arch_vcpu_ioctl_run()
+		vcpu_run()
+			for (;;) {
+				vcpu_enter_guest()
+					kvm_x86_ops->run(vcpu);		/* 发生vm entry和vm exit */
+					r = kvm_x86_ops->handle_exit(vcpu);
+			}
+
+
+qemu部分
+kvm_init()
+	s->fd = qemu_open("/dev/kvm", O_RDWR);
+	ret = kvm_ioctl(s, KVM_CREATE_VM, type);
+
+	memory_listener_register()	/* 该函数会配置虚机内存空间 */
+		listener_add_address_space()
+			kvm_region_add()	(listener->region_add(listener, &section);)
+				kvm_set_phys_mem()
+					kvm_set_user_memory_region()
+						/* 该函数用于将物理机线程的虚地址分配给虚机作为虚机的物理地址 */
+						kvm_vm_ioctl(s, KVM_SET_USER_MEMORY_REGION, &mem);
+
+实际vcpu对应线程的启动
+	x86_cpu_realizefn()
+		qemu_init_vcpu()
+			qemu_kvm_start_vcpu()
+				qemu_thread_create(... qemu_kvm_cpu_thread_fn ...)
+
+qemu_kvm_cpu_thread_fn()
+{
+	kvm_init_vcpu()
+		kvm_get_vcpu()
+			kvm_vm_ioctl(s, KVM_CREATE_VCPU, (void *)vcpu_id);
+
+			/* 该部分mmap内存用于qemu和kvm交互 */
+		    mmap_size = kvm_ioctl(s, KVM_GET_VCPU_MMAP_SIZE, 0);
+		    cpu->kvm_run = mmap(NULL, mmap_size, PROT_READ | PROT_WRITE, MAP_SHARED,
+		                        cpu->kvm_fd, 0);
+
+	kvm_cpu_exec()
+		run_ret = kvm_vcpu_ioctl(cpu, KVM_RUN, 0);
+
+		switch (run->exit_reason) {
+		case KVM_EXIT_IO:
+		.
+		.
+		.
+		}
+}
