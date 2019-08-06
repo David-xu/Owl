@@ -1,0 +1,9 @@
+基本使用：
+编译时添加-pg选项
+程序必须正常退出，此时会产生一个gmon.out文件，然后使用gprof解析这个文件得到分析结果,如可执行文件为test，则：
+gprof test gmon.out
+
+多线程使用：
+先编译一个pthread_create的重实现版本替换pthread中实现
+gcc -shared -fPIC gprof-helper.c -o libgprof-helper.so -lpthread -ldl
+在生成可执行程序中连接这个libgprof-helper.so库，注意要放在pthread之前
