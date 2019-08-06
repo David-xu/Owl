@@ -1,0 +1,16 @@
+http://www.cnblogs.com/jianing/p/9368328.html
+
+1.
+
+2./etc/network/interfaces
+auto eth0下的接口配置由iface eth0 inet dhcp改为以下内容
+# The primary network interface
+auto eth0
+iface eth0 inet static
+address 192.168.1.10    #要固定的IP地址
+netmask 255.255.255.0   #ifconf可以查看的子网掩码
+gateway 192.168.1.1     #默认网关dns-nameserver 114.114.114.114 8.8.8.8  #静态DNS码
+
+3./etc/resolvconf/resolv.conf.d/base
+增加DNS服务器
+nameserver 8.8.8.8

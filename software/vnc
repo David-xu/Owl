@@ -17,3 +17,25 @@ commands:
 vncserver :1 -geometry 1500x850
 vncserver -list
 vncserver -kill :1
+
+centos 6.3:
+0.安装gnome 如果系统是个服务器版本 则需要 桌面版本不需要
+此为vnc基础服务 需要安装gnome桌面
+yum install gnome-terminal gnome-panel gnome-session nautilus
+其余相关包可以根据情况再自行添加
+1.安装tigervnc
+yum install tigervnc-server
+2.配置/etc/sysconfig/vncservers 添加用户
+VNCSERVERS="1:root 2:david"
+VNCSERVERARGS[1]="-geometry 800x600 -depth 24"
+VNCSERVERARGS[2]="-geometry 1920x1080 -depth 24"
+3.在对应的用户下手动启动一次vncserver 用于配置初始密码和生成配置脚本
+需要修改xstartup 删除xterm启动那行
+完了把最终启动的twm改成启动gnome-session
+4.vncserver改为开机启动
+chkconfig vncserver on (chkconfig --list vncserver可查看状态)
+
+[开机启动]
+chkconfig --list vncserver
+chkconfig vncserver on
+

@@ -1,0 +1,26 @@
+[服务器搭建]
+1.apt-get install samba
+2.防火墙
+3.selinux
+
+[用户配置]
+以下操作均是root权限下操作
+0.创建linux用户(adduser) 以下以david举例
+1.增加samba用户，和上步用户名一致: smbpassword -a david
+2.修改/etc/samba/smb.conf,添加用户配置 建议使用security=user 这样在win下操作权限均直接是对应的用户权限
+[david]
+        comment = david
+        path = /home/david
+        security = user
+        writeable = yes
+        browseable = yes
+        read only = NO
+3.重启smb服务: /etc/init.d/samba restart
+4.直接访问(//10.64.36.97/david)或者建立映射
+
+[centos 开机启动]
+chkconfig --list smb
+chkconfig smb on
+
+[ubuntu 开机启动]
+由于没有chkconfig 暂缺

@@ -22,3 +22,7 @@
 	
 9. git pull
 	如果本地分支跟踪了远程仓库的某个分支，则该命令会很方便的直接抓取数据并合并到本地分支
+
+tips:
+1. 只取某个指定的标签的版本，无需clone整个库
+git clone --depth 1 <repo:> -b <branch/tag>
