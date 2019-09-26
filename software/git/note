@@ -23,6 +23,10 @@
 9. git pull
 	如果本地分支跟踪了远程仓库的某个分支，则该命令会很方便的直接抓取数据并合并到本地分支
 
+# 匿名分支的由来
+当checkout到一个历史提交时，会将head指针指向这个提交，git会新建一个匿名分支来保存这个状态，git branch -a会看到一个(detached xxx)的匿名分支。想要恢复只需要checkout切换回之前那个分支就好了。
+需要注意的时切换回去后，原先匿名分支上的后续commit都会被删除，所以如果想要保留匿名分支上的后续提交，一个简单办法就是在匿名分支上新建一个分支，即通过git checkout -b xxx的方式，然后再和原先的分支进行merge。
+
 tips:
 1. 只取某个指定的标签的版本，无需clone整个库
 git clone --depth 1 <repo:> -b <branch/tag>
@@ -34,3 +38,4 @@ git config user.email stone.dawei@gmail.com
 
 3. 关闭换行符自动转换
 git config --global core.autocrlf false
+
