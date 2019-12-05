@@ -1,3 +1,6 @@
 安装iso到虚拟磁盘并启动，使用桥接网络和host进行通信，这里tapup.sh和tapdown.sh中用于将虚拟网络网卡添加到网桥。
 可以通过vnc直接连接桌面。
 
+配置tap网络，注意到老的-net选项在后续qemu中不再支持，改为前后端的配置方式，其中-netdev是后端，-device是前端
+-netdev tap,id=hostnet0,vhost=off,script=tapup.sh,downscript=tapdown.sh
+-device e1000,netdev=hostnet0,mac=52:a4:00:12:78:66

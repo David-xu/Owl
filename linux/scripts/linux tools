@@ -1,0 +1,5 @@
+常用工具命令：
+
+1./sbin/pidof
+获取运行中任务的pid
+kill $(pidof test) 简便杀死指定任务的方式
